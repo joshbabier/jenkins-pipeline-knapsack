@@ -8,7 +8,7 @@ node {
 stage 'Tests'
 
 parallel(
-  knapsack(2) {
+  knapsack(4) {
     withRbenv('ruby-2.1.8') {
       unpack()
 
