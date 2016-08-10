@@ -1,2 +1,11 @@
 {
+  "spec/quick/quick_cruncher3_spec.rb": 60.005507946014404,
+  "spec/medium/medium_cruncher1_spec.rb": 600.0036129951477,
+  "spec/slow/slow_cruncher2_spec.rb": 1800.0079610347748,
+  "spec/medium/medium_cruncher3_spec.rb": 600.0035240650177,
+  "spec/slow/slow_cruncher1_spec.rb": 1800.0029702186584,
+  "spec/quick/quick_cruncher1_spec.rb": 60.000436305999756,
+  "spec/medium/medium_cruncher2_spec.rb": 600.004152059555,
+  "spec/slow/slow_cruncher3_spec.rb": 1800.0045139789581,
+  "spec/quick/quick_cruncher2_spec.rb": 60.00051784515381
 }

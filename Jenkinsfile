@@ -14,7 +14,7 @@ parallel(
 
       try {
         bundle()
-        sh 'KNAPSACK_GENERATE_REPORT=true bundle exec rake knapsack:rspec'
+        sh 'bundle exec rake knapsack:rspec'
       }
       finally {
         clearWorkspace()
