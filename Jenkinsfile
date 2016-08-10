@@ -8,7 +8,7 @@ node {
 stage 'Tests'
 
 parallel(
-  knapsack(5) {
+  knapsack(4) {
     withRbenv('ruby-2.1.8') {
       unpack()
 
@@ -67,7 +67,8 @@ def clearWorkspace() {
 }
 
 def withRbenv(version, cl) {
-    withRbenv(version, "executor-${env.EXECUTOR_NUMBER}") {
+//    withRbenv(version, "executor-${env.EXECUTOR_NUMBER}") {
+    withRbenv(version, "executor-1") {
         cl()
     }
 }
