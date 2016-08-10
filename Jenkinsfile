@@ -89,7 +89,8 @@ def withRbenv(version, gemset, cl) {
     withEnv([
         "PATH=$path"
     ]) {
-        sh 'eval "$(rbenv init -)"; rbenv global 2.1.8'
+        sh 'eval "$(rbenv init -)"'
+        sh 'rbenv global 2.1.8'
         sh 'ruby -v'
         cl()
     }
