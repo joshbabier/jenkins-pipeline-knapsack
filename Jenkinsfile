@@ -82,11 +82,14 @@ def withRbenv(version, gemset, cl) {
 
     def path = paths.join(':')
 
+    withEnv(["PATH=${env.PATH}:$RBENV_HOME", "RBENV_HOME=$RBENV_HOME"]) {
+        sh 'eval "$($RBENV_HOME/bin/rbenv init -)"; rbenv global 2.1.8'
+    }
+
     withEnv([
         "PATH=$path"
     ]) {
-        sh 'eval "$(rbenv init -)"'
-        sh "$HOME/.rbenv/bin/rbenv global 2.1.8"
+
         cl()
     }
 }
