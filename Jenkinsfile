@@ -76,6 +76,7 @@ def withRbenv(version, gemset, cl) {
     RBENV_HOME='$HOME/.rbenv'
     paths = [
         "$RBENV_HOME/bin",
+        "$RBENV_HOME/shims",
         "$RBENV_HOME/plugins/ruby-build/bin",
         "${env.PATH}"
     ]
