@@ -54,7 +54,7 @@ def unpack() {
 }
 
 def bundler() {
-    sh "gem install bundler -- --silent --quiet --no-verbose --no-document"
+    sh "gem install bundler"
 }
 
 def bundle() {
@@ -82,20 +82,11 @@ def withRbenv(version, gemset, cl) {
 
     def path = paths.join(':')
 
-//    withEnv(["PATH=${env.PATH}:$RBENV_HOME", "RBENV_HOME=$RBENV_HOME"]) {
-//        sh "set +x; source $RBENV_HOME/scripts/rbenv; rbenv use --create --install --binary $version@$gemset"
-//    }
-
     withEnv([
-        "PATH=$path",
-//        "GEM_HOME=$RBENV_HOME/gems/$version@$gemset",
-//        "GEM_PATH=$RBENV_HOME/gems/$version@$gemset:$RBENV_HOME/gems/$version@global",
-//        "MY_RUBY_HOME=$RBENV_HOME/rubies/$version",
-//        "IRBRC=$RBENV_HOME/rubies/$version/.irbrc",
-//        "RUBY_VERSION=$version"
+        "PATH=$path"
     ]) {
         sh 'eval "$(rbenv init -)"'
-        sh 'rbenv global 2.1.8'
+        sh "$HOME/.rbenv/bin/rbenv global 2.1.8"
         cl()
     }
 }
