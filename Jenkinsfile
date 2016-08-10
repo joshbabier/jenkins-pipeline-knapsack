@@ -89,7 +89,7 @@ def withRbenv(version, gemset, cl) {
     withEnv([
         "PATH=$path"
     ]) {
-
+        sh 'ruby -v'
         cl()
     }
 }
