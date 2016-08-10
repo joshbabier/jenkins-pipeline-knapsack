@@ -9,7 +9,7 @@ stage 'Tests'
 
 parallel(
   knapsack(2) {
-    withRvm('ruby-2.3.1') {
+    withRbenv('ruby-2.1.8') {
       unpack()
 
       try {
@@ -62,41 +62,40 @@ def bundle() {
     sh "bundle --quiet"
 }
 
-def withRvm(version, cl) {
-    withRvm(version, "executor-${env.EXECUTOR_NUMBER}") {
-        cl()
-    }
-}
-
 def clearWorkspace() {
     sh 'rm -rf *'
 }
 
-def withRvm(version, gemset, cl) {
-    RVM_HOME='$HOME/.rvm'
+def withRbenv(version, cl) {
+    withRbenv(version, "executor-${env.EXECUTOR_NUMBER}") {
+        cl()
+    }
+}
+
+def withRbenv(version, gemset, cl) {
+    RBENV_HOME='$HOME/.rbenv'
     paths = [
-        "$RVM_HOME/gems/$version@$gemset/bin",
-        "$RVM_HOME/gems/$version@global/bin",
-        "$RVM_HOME/rubies/$version/bin",
-        "$RVM_HOME/bin",
+        "$RBENV_HOME/bin",
+        "$RBENV_HOME/plugins/ruby-build/bin",
         "${env.PATH}"
     ]
 
     def path = paths.join(':')
 
-    withEnv(["PATH=${env.PATH}:$RVM_HOME", "RVM_HOME=$RVM_HOME"]) {
-        sh "set +x; source $RVM_HOME/scripts/rvm; rvm use --create --install --binary $version@$gemset"
-    }
+//    withEnv(["PATH=${env.PATH}:$RBENV_HOME", "RBENV_HOME=$RBENV_HOME"]) {
+//        sh "set +x; source $RBENV_HOME/scripts/rbenv; rbenv use --create --install --binary $version@$gemset"
+//    }
 
     withEnv([
         "PATH=$path",
-        "GEM_HOME=$RVM_HOME/gems/$version@$gemset",
-        "GEM_PATH=$RVM_HOME/gems/$version@$gemset:$RVM_HOME/gems/$version@global",
-        "MY_RUBY_HOME=$RVM_HOME/rubies/$version",
-        "IRBRC=$RVM_HOME/rubies/$version/.irbrc",
-        "RUBY_VERSION=$version"
+//        "GEM_HOME=$RBENV_HOME/gems/$version@$gemset",
+//        "GEM_PATH=$RBENV_HOME/gems/$version@$gemset:$RBENV_HOME/gems/$version@global",
+//        "MY_RUBY_HOME=$RBENV_HOME/rubies/$version",
+//        "IRBRC=$RBENV_HOME/rubies/$version/.irbrc",
+//        "RUBY_VERSION=$version"
     ]) {
-        sh 'rvm info'
+        sh 'eval "$(rbenv init -)"'
+        sh 'rbenv global 2.1.8'
         cl()
     }
 }
