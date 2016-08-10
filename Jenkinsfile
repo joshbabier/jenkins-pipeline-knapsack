@@ -8,13 +8,13 @@ node {
 stage 'Tests'
 
 parallel(
-  knapsack(2) {
+  knapsack(1) {
     withRbenv('ruby-2.1.8') {
       unpack()
 
       try {
         bundle()
-        sh 'bundle exec rake knapsack:rspec'
+        sh 'KNAPSACK_GENERATE_REPORT=true bundle exec rake knapsack:rspec'
       }
       finally {
         clearWorkspace()
