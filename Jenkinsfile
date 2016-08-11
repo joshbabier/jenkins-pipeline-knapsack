@@ -9,7 +9,7 @@ stage 'Tests'
 
 parallel(
   knapsack(5) {
-    withRbenv('ruby-2.1.8') {
+    withRbenv('2.1.8') {
       unpack()
 
       try {
@@ -86,14 +86,8 @@ def withRbenv(version, gemset, cl) {
     withEnv([
         "PATH=$path"
     ]) {
-        def currentRuby =  "${sh 'ruby -v'}"
-        println currentRuby
-
-        if(currentRuby != 'ruby 2.1.8p440 (2015-12-16 revision 53160) [x86_64-linux]') {
-            sh 'eval "$(rbenv init -)"'
-            sh 'rbenv global 2.1.8'
-        }
-
+        sh 'eval "$(rbenv init -)"'
+        sh "rbenv global $version"
         cl()
     }
 }
