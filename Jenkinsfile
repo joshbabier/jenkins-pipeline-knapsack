@@ -31,7 +31,7 @@ def knapsack(ci_node_total, cl) {
     def index = i;
 
     nodes["ci_node_${i}"] = {
-      node {
+      node('cruncher') {
         withEnv(["CI_NODE_INDEX=$index", "CI_NODE_TOTAL=$ci_node_total"]) {
           cl()
         }
