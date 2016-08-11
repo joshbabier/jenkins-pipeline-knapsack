@@ -87,6 +87,7 @@ def withRbenv(version, gemset, cl) {
         "PATH=$path"
     ]) {
         def currentRuby = sh 'ruby -v'
+        println currentRuby
 
         if(currentRuby != 'ruby 2.1.8p440 (2015-12-16 revision 53160) [x86_64-linux]') {
             sh 'eval "$(rbenv init -)"'
