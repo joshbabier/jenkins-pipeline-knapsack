@@ -67,8 +67,7 @@ def clearWorkspace() {
 }
 
 def withRbenv(version, cl) {
-//    withRbenv(version, "executor-${env.EXECUTOR_NUMBER}") {
-    withRbenv(version, "executor-1") {
+    withRbenv(version, "executor-${env.EXECUTOR_NUMBER}") {
         cl()
     }
 }
