@@ -86,14 +86,13 @@ def withRbenv(version, gemset, cl) {
     withEnv([
         "PATH=$path"
     ]) {
-        try {
-            sh 'ruby -v'
-        }
-        finally {
+        def currentRuby = sh 'ruby -v'
+
+        if(currentRuby != 'ruby 2.1.8p440 (2015-12-16 revision 53160) [x86_64-linux]') {
             sh 'eval "$(rbenv init -)"'
             sh 'rbenv global 2.1.8'
-            sh 'ruby -v'
-            cl()
         }
+
+        cl()
     }
 }
